@@ -20,6 +20,11 @@ export class AuthorizationService {
     return `This action returns all authorization`;
   }
 
+  async findByUsername(username: string) {
+    return this.AuthorizationModel.findOne({ username }).exec();
+  }
+  
+
   findOne(id: number) {
     return `This action returns a #${id} authorization`;
   }
