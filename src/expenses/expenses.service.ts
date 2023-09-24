@@ -1,11 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { CreateExpenseDto } from './dto/create-expense.dto';
 import { UpdateExpenseDto } from './dto/update-expense.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Expenses } from './schemas/expenses.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class ExpensesService {
+
+  constructor(
+    @InjectModel(Expenses.name) private ExpensesModel: Model<Expenses>,
+  ) {}
+
   create(createExpenseDto: CreateExpenseDto) {
-    return 'This action adds a new expense';
+    const expenseToSave = new this.ExpensesModel(createExpenseDto);
+    return expenseToSave.save();
   }
 
   findAll() {
