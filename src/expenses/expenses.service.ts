@@ -18,7 +18,7 @@ export class ExpensesService {
   }
 
   findAll() {
-    return `This action returns all expenses`;
+    return this.ExpensesModel.find();
   }
 
   findOne(id: number) {
